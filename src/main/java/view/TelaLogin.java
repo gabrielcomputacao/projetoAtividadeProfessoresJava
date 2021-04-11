@@ -5,12 +5,21 @@
  */
 package view;
 
+import controller.ControlLogin;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author Gabriel
  */
 public class TelaLogin extends javax.swing.JFrame {
 
+  
+    
+    ControlLogin controlLogin = new ControlLogin();
+    TelaAction telaPrincipal = new TelaAction();
+    TelaCadastrarUser cadastroUsuario = new TelaCadastrarUser();
     /**
      * Creates new form TelaLogin
      */
@@ -29,9 +38,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        loginLogin = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        loginPassword = new javax.swing.JPasswordField();
         botaoEntrarSistema = new javax.swing.JButton();
         botaoCadastrar = new javax.swing.JButton();
 
@@ -41,17 +50,17 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel1.setText("Login:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        loginLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                loginLoginActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Password:");
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        loginPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                loginPasswordActionPerformed(evt);
             }
         });
 
@@ -78,8 +87,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
+                    .addComponent(loginLogin)
+                    .addComponent(loginPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -94,11 +103,11 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(88, 88, 88)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoEntrarSistema)
@@ -121,22 +130,29 @@ public class TelaLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void loginLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginLoginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_loginLoginActionPerformed
 
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
-        TelaCadastrarUser cadastroUsuario = new TelaCadastrarUser();
-         cadastroUsuario.setVisible(true);
+        
+         cadastroUsuario.setVisible(true);   
     }//GEN-LAST:event_botaoCadastrarActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void loginPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_loginPasswordActionPerformed
 
     private void botaoEntrarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarSistemaActionPerformed
-        TelaAction telaPrincipal = new TelaAction();
-        telaPrincipal.setVisible(true);
+       
+        String senha = new String(loginPassword.getPassword());
+        
+        if( controlLogin.verificaLoginAcesso(cadastroUsuario.controlCadastro.getUser().getLogin(), cadastroUsuario.controlCadastro.getUser().getPassword(),loginLogin.getText() , senha)){
+            telaPrincipal.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Login ou password incorretos, favor verificar!");
+        }
+
     }//GEN-LAST:event_botaoEntrarSistemaActionPerformed
 
     /**
@@ -180,7 +196,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField loginLogin;
+    private javax.swing.JPasswordField loginPassword;
     // End of variables declaration//GEN-END:variables
 }

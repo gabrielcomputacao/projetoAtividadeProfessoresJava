@@ -5,6 +5,13 @@
  */
 package view;
 
+import controller.ControlAction;
+import model.Usuario;
+
+
+
+
+
 /**
  *
  * @author Gabriel
@@ -14,9 +21,32 @@ public class TelaAction extends javax.swing.JFrame {
     /**
      * Creates new form TelaAction
      */
+    
+    TelaLogin telaLogin = new TelaLogin();
+    Usuario user = telaLogin.cadastroUsuario.controlCadastro.getUser();
+    ControlAction controlAction = new ControlAction();
+    
+    
     public TelaAction() {
         initComponents();
+        perfil();
+        
+        
     }
+    
+    
+    public void perfil(){
+        //chamando o contorller para fazer a verificação
+       if( controlAction.verificarPerfilUsuario(user)){
+           menuChefe.setEnabled(false);
+       }else{
+           menuProfessor.setEnabled(false);
+       }
+        
+    }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,15 +59,17 @@ public class TelaAction extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuProfessor = new javax.swing.JMenu();
         menuBancaDefesa = new javax.swing.JMenuItem();
         menuEventoCientifico = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuChefe = new javax.swing.JMenu();
         validacoes = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         menuEventoCientificoChefe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela Principal");
+        setResizable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -50,7 +82,7 @@ public class TelaAction extends javax.swing.JFrame {
             .addGap(0, 278, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Professor");
+        menuProfessor.setText("Professor");
 
         menuBancaDefesa.setText("Banca de Defesa");
         menuBancaDefesa.addActionListener(new java.awt.event.ActionListener() {
@@ -58,7 +90,7 @@ public class TelaAction extends javax.swing.JFrame {
                 menuBancaDefesaActionPerformed(evt);
             }
         });
-        jMenu1.add(menuBancaDefesa);
+        menuProfessor.add(menuBancaDefesa);
 
         menuEventoCientifico.setText("Evento Científico");
         menuEventoCientifico.addActionListener(new java.awt.event.ActionListener() {
@@ -66,11 +98,11 @@ public class TelaAction extends javax.swing.JFrame {
                 menuEventoCientificoActionPerformed(evt);
             }
         });
-        jMenu1.add(menuEventoCientifico);
+        menuProfessor.add(menuEventoCientifico);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuProfessor);
 
-        jMenu2.setText("Chefe de Departamento");
+        menuChefe.setText("Chefe de Departamento");
 
         validacoes.setText("Validações");
         validacoes.addActionListener(new java.awt.event.ActionListener() {
@@ -95,9 +127,9 @@ public class TelaAction extends javax.swing.JFrame {
         });
         validacoes.add(menuEventoCientificoChefe);
 
-        jMenu2.add(validacoes);
+        menuChefe.add(validacoes);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuChefe);
 
         setJMenuBar(jMenuBar1);
 
@@ -113,6 +145,7 @@ public class TelaAction extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -175,14 +208,14 @@ public class TelaAction extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuBancaDefesa;
+    private javax.swing.JMenu menuChefe;
     private javax.swing.JMenuItem menuEventoCientifico;
     private javax.swing.JMenuItem menuEventoCientificoChefe;
+    private javax.swing.JMenu menuProfessor;
     private javax.swing.JMenu validacoes;
     // End of variables declaration//GEN-END:variables
 }
